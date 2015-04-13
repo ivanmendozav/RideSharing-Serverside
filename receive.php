@@ -37,7 +37,7 @@ $user_id = filter_input(INPUT_POST,"user_id",FILTER_VALIDATE_INT);
      
      if(move_uploaded_file($tmp_name, "$uploads_dir/$filename")){ 
          chmod("$uploads_dir/$filename",0777);
-         echo "File($sensor_id) received OK:".$filename;
+         //echo "File($sensor_id) received OK:".$filename;
         //Parse each file
         if ($sensor_id == $_BATTERY){            
             include_once "batteryParser.php";

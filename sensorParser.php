@@ -27,19 +27,24 @@ abstract class sensorParser{
      * Parse CSV and store in Database
      */
     public function parse(){
-        if($this->filename){
-            //echo "Processing file:".$this->filename;
-            $filename = $this->filename;
-            $uploads_dir = $this->uploads_dir;
-            if (($handle = fopen("$uploads_dir/$filename", "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                    $this->parseLine($data, $this->user_id);
+        try{
+            if($this->filename){
+                //echo "Processing file:".$this->filename;
+                $filename = $this->filename;
+                $uploads_dir = $this->uploads_dir;
+                if (($handle = fopen("$uploads_dir/$filename", "r")) !== FALSE) {
+                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                        $this->parseLine($data, $this->user_id);
+                    }
+                    fclose($handle);
                 }
-                fclose($handle);
-            }
-            //unlink("$uploads_dir/$filename");
-        }else
-            echo "not found:".$this->filename;
+                //unlink("$uploads_dir/$filename");
+                echo $this->filename." uploaded OK!";
+            }else{
+            echo "not found:".$this->filename;}
+        }catch(Exception $e){
+            echo "ERROR uploading ".$this->filename;
+        }
     }
     /**
      * To be implemented for each type of sensor (instructions to parse each line)
