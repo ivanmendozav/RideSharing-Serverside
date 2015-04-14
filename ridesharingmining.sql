@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2015 at 04:37 PM
+-- Generation Time: Apr 13, 2015 at 04:05 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `accelerometer_sensor_data` (
   `x` double NOT NULL,
   `y` double NOT NULL,
   `z` double NOT NULL,
-  `timestamp` int(14) NOT NULL,
+  `timestamp` bigint(14) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `battery_sensor_data` (
   `usb` tinyint(1) NOT NULL COMMENT 'is connected to usb',
   `ac` tinyint(1) NOT NULL COMMENT 'is connected to ac',
   `level` tinyint(3) unsigned NOT NULL COMMENT 'battery level',
-  `timestamp` int(14) NOT NULL COMMENT 'sensor timestamp',
+  `timestamp` bigint(14) NOT NULL COMMENT 'sensor timestamp',
   `user_id` int(11) NOT NULL COMMENT 'account unique id',
   `enabled` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'for logical deletion',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'database timestamo',
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `battery_sensor_data` (
 CREATE TABLE IF NOT EXISTS `gps_sensor_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
-  `timestamp` int(14) NOT NULL,
+  `timestamp` bigint(14) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `latitude` float NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `gps_sensor_data` (
 CREATE TABLE IF NOT EXISTS `wifi_sensor_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
-  `timestamp` int(14) NOT NULL,
+  `timestamp` bigint(14) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
