@@ -17,14 +17,20 @@ $_AMBIENT_TEMPERATURE =13;
 $_TYPE_STEP_DETECTOR =18;
 
 $uploads_dir = 'uploads/'; //Directory to save the file that comes from client application.     
-
+//local
 define("DB_NAME" , "ridesharingmining");
 define("DB_USER","root");
 define("DB_PASSWORD","");
 define("DB_HOST","localhost");
 define("DB_PORT",3306);
 define("DB_PERSISTANT", false);
-
+//server (godaddy)
+//define("DB_NAME" , "test_cases");
+//define("DB_USER","test_cases");
+//define("DB_PASSWORD","malmsteen");
+//define("DB_HOST","localhost");
+//define("DB_PORT",3306);
+//define("DB_PERSISTANT", false);
 
 $sensor_id = filter_input(INPUT_POST,"sensor_id",FILTER_VALIDATE_INT);
 $user_id = filter_input(INPUT_POST,"user_id",FILTER_VALIDATE_INT);
@@ -37,28 +43,27 @@ $user_id = filter_input(INPUT_POST,"user_id",FILTER_VALIDATE_INT);
      
      if(move_uploaded_file($tmp_name, "$uploads_dir/$filename")){ 
          chmod("$uploads_dir/$filename",0777);
-         //echo "File($sensor_id) received OK:".$filename;
         //Parse each file
         if ($sensor_id == $_BATTERY){            
-            include_once "batteryParser.php";
+            include_once "lib_mining/batteryParser.php";
             $parser = new batteryParser($filename, $user_id);
             $parser->setDir($uploads_dir);
             $parser->parse();
         }
         if ($sensor_id == $_ACCELEROMETER){
-            include_once "accelerometerParser.php";
+            include_once "lib_mining/accelerometerParser.php";
             $parser = new accelerometerParser($filename, $user_id);
             $parser->setDir($uploads_dir);
             $parser->parse();
         }
         if ($sensor_id == $_WIFI){
-            include_once "wifiParser.php";
+            include_once "lib_mining/wifiParser.php";
             $parser = new wifiParser($filename, $user_id);
             $parser->setDir($uploads_dir);
             $parser->parse();
         }
         if ($sensor_id == $_GPS){
-            include_once "gpsParser.php";
+            include_once "lib_mining/gpsParser.php";
             $parser = new gpsParser($filename, $user_id);
             $parser->setDir($uploads_dir);
             $parser->parse();
