@@ -12,16 +12,13 @@ class batteryParser extends sensorParser{
      * @overrides
      * @param type $row
      */
-    protected function parseLine($row, $user_id){
+    protected function parseLine($db,$row, $user_id){
         $charging = $row[$this->_CHARGING];
         $usb = $row[$this->_USB];
         $ac = $row[$this->_AC];
         $level = $row[$this->_LEVEL];
         $timestamp = $row[$this->_TIMESTAMP];
-        
-        $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+
         $db->insert("battery_sensor_data", array("charging" => $charging, "usb" => $usb, "ac" => $ac, "level" => $level, "timestamp" => $timestamp, "user_id" => $user_id),'',array("integer","integer","integer","float","float","integer"));
-        $db->commit();
-        $db->closeConnection();
     }
 }

@@ -214,7 +214,7 @@ class MySQL {
         array_push($exclude, 'MAX_FILE_SIZE'); // Automatically exclude this one
         // Prepare Variables
 
-        $vars = $this->SecureData($vars, $datatypes);
+        //$vars = $this->SecureData($vars, $datatypes);
         $query = "INSERT INTO `{$table}` SET ";
         
         foreach($vars as $key=>$value){

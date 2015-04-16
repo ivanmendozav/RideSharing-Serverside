@@ -12,15 +12,12 @@ class gpsParser extends sensorParser{
      * @overrides
      * @param type $row
      */
-    protected function parseLine($row, $user_id){
+    protected function parseLine($db, $row, $user_id){
         $latitude = $row[$this->_LATITUDE];
         $longitude = $row[$this->_LONGITUDE];
         $altitude = $row[$this->_ALTITUDE];
         $timestamp = $row[$this->_TIMESTAMP];
-        
-        $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+          
         $db->insert("gps_sensor_data", array("latitude" => $latitude, "longitude" => $longitude, "altitude" => $altitude, "timestamp" => $timestamp, "user_id" => $user_id),'',array("float","float","float","float","integer"));
-        $db->commit();
-        $db->closeConnection();
     }
 }

@@ -18,19 +18,20 @@ $_TYPE_STEP_DETECTOR =18;
 
 $uploads_dir = 'uploads/'; //Directory to save the file that comes from client application.     
 //local
-define("DB_NAME" , "ridesharingmining");
-define("DB_USER","root");
-define("DB_PASSWORD","");
-define("DB_HOST","localhost");
-define("DB_PORT",3306);
-define("DB_PERSISTANT", false);
-//server (godaddy)
-//define("DB_NAME" , "test_cases");
-//define("DB_USER","test_cases");
-//define("DB_PASSWORD","malmsteen");
+//define("DB_NAME" , "ridesharingmining");
+//define("DB_USER","root");
+//define("DB_PASSWORD","");
 //define("DB_HOST","localhost");
 //define("DB_PORT",3306);
 //define("DB_PERSISTANT", false);
+//server (godaddy)
+define("DB_NAME" , "test_cases");
+define("DB_USER","test_cases");
+define("DB_PASSWORD","malmsteen");
+define("DB_HOST","localhost");
+define("DB_PORT",3306);
+define("DB_PERSISTANT", false);
+define("ANONYMOUS_ID", 1);
 
 $sensor_id = filter_input(INPUT_POST,"sensor_id",FILTER_VALIDATE_INT);
 $user_id = filter_input(INPUT_POST,"user_id",FILTER_VALIDATE_INT);

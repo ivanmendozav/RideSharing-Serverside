@@ -12,15 +12,11 @@ class accelerometerParser extends sensorParser{
      * @param type $row
      * @param type $user_id
      */
-    protected function parseLine($row, $user_id){
+    protected function parseLine($db,$row, $user_id){
         $x = $row[$this->_X];
         $y = $row[$this->_Y];
         $z = $row[$this->_Z];
         $timestamp = $row[$this->_TIMESTAMP];
-        
-        $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
         $db->insert("accelerometer_sensor_data", array("x" => $x, "y" => $y, "z" => $z,"timestamp" => $timestamp, "user_id" => $user_id),'',array("float","float","float","string","integer"));
-        $db->commit();
-        $db->closeConnection();
     }
 }

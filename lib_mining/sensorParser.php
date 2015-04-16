@@ -5,15 +5,15 @@ include_once "MySql.php";
  */
 abstract class sensorParser{
     private $filename;
-    private $user_id;
+    private $username;
     private $uploads_dir;
     /**
      * Initialize filename
      * @param type $filename
      */
-    public function __construct($filename, $user_id) {
+    public function __construct($filename, $username) {
         $this->filename = $filename;
-        $this->user_id = $user_id;
+        $this->username = $username;
     }
     /**
      * Specify search path for files
@@ -27,27 +27,49 @@ abstract class sensorParser{
      * Parse CSV and store in Database
      */
     public function parse(){
-        try{
-            if($this->filename){
-                //echo "Processing file:".$this->filename;
+        if($this->filename){        
+            try{
+                $user_id = $this->checkUser($this->username);
+                $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+                //echo "Connecting to ".DB_NAME.",".DB_USER.",".DB_PASSWORD;
+                if($db->lastError){
+                throw new Exception ("Couldn't connect to ".DB_NAME.",".DB_USER.",".DB_PASSWORD);}
+                    
                 $filename = $this->filename;
                 $uploads_dir = $this->uploads_dir;
                 if (($handle = fopen("$uploads_dir/$filename", "r")) !== FALSE) {
-                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                        $this->parseLine($data, $this->user_id);
-                    }
-                    fclose($handle);
+                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {  
+                        $this->parseLine($db,$data, $user_id);     
+                    }                    
                 }
-                //unlink("$uploads_dir/$filename");
+                fclose($handle);
+                unlink("$uploads_dir/$filename");
+                $db->commit();
+                $db->closeConnection();
                 echo $this->filename." uploaded OK!";
-            }else{
-            echo "not found:".$this->filename;}
-        }catch(Exception $e){
-            echo "ERROR uploading ".$this->filename;
+            }
+            catch(Exception $e){
+                echo "ERROR decoding file".$this->filename." : ".$e->getMessage();
+                if(!is_null($db)){
+                    $db->rollback();
+                    $db->closeConnection();                    
+                }
+            }
         }
+        else{
+            echo "File not found:".$this->filename;}
     }
     /**
      * To be implemented for each type of sensor (instructions to parse each line)
      */
-    abstract protected function parseLine($data, $user_id);
+    abstract protected function parseLine($db,$data, $username);
+    
+    protected function checkUser($username){
+        $this->db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+        $user = $this->db->select("users", array("username" => "$username"));
+        if($user["id"])
+            return $user["id"];
+        else
+            return ANONYMOUS_ID;
+    }
 }

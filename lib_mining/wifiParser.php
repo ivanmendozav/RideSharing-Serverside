@@ -13,14 +13,11 @@ class wifiParser extends sensorParser{
      * @param array $row
      * @param int $user_id
      */
-    protected function parseLine($row, $user_id){
+    protected function parseLine($db,$row, $user_id){
         $status = $row[$this->_STATUS];
         $ssid = $row[$this->_SSID];
         $timestamp = $row[$this->_TIMESTAMP];
-         
-        $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+
         $db->insert("wifi_sensor_data", array("status" => $status, "ssid" => $ssid, "timestamp" => $timestamp, "user_id" => $user_id),'',array("integer","string","float", "integer"));
-        $db->commit();
-        $db->closeConnection();
     }
 }
