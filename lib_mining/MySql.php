@@ -19,6 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 // MySQL Class v0.8.1
+
+
+
 class MySQL {
 	
 	// Base variables
@@ -175,6 +178,7 @@ class MySQL {
     // Executes MySQL query
     public function executeSQL($query){
         $this->lastQuery = $query;
+        //echo $query;
         if($this->result = mysql_query($query, $this->databaseLink)){
             if (gettype($this->result) === 'resource') {
                 $this->records  = @mysql_num_rows($this->result);
@@ -256,7 +260,7 @@ class MySQL {
         $query = "SELECT {$cols} FROM `{$from}` WHERE ";
         if(is_array($where) && $where != ''){
             // Prepare Variables
-            $where = $this->SecureData($where, $wheretypes);
+            //$where = $this->SecureData($where, $wheretypes);
             foreach($where as $key=>$value){
                 if($like){
                     $query .= "`{$key}` LIKE '%{$value}%' {$operand} ";
