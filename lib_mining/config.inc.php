@@ -10,6 +10,7 @@ define(ACCELEROMETER,1);
 define(BATTERY,90);
 define(WIFI,91);
 define(GPS,92);
+define(STAY_POINTS, 100);
 
 //$_MAGNETIC_FIELD =2;
 //$_GYROSCOPE =4;
@@ -42,6 +43,7 @@ define("DB_HOST","localhost");
 define("DB_PORT",3306);
 define("DB_PERSISTANT", false);
 define("ANONYMOUS_ID", 1);
+define("TABLE_NAME", "stay_points");
 
 /*PATHS*/
 define("UPLOAD_DIR","uploads/");

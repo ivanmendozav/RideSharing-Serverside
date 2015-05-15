@@ -187,6 +187,8 @@ class MySQL {
                $this->records  = 0;
                $this->affected = 0;
             }
+            //echo $this->records.".";
+            //echo $this->affected.".";
             if($this->records > 0){
                 $this->arrayResults();
                 return $this->arrayedResult;
@@ -195,6 +197,7 @@ class MySQL {
             }
         }else{
             $this->lastError = mysql_error($this->databaseLink);
+           // echo $this->lastError;
             return false;
         }
     }
@@ -228,7 +231,7 @@ class MySQL {
             $query .= "`{$key}` = '{$value}', ";
         }
         $query = trim($query, ', ');
-        //echo $query;
+
         return $this->executeSQL($query);
     }
     // Deletes a record from the database
@@ -290,8 +293,8 @@ class MySQL {
             $exclude = array();
         }
         array_push($exclude, 'MAX_FILE_SIZE'); // Automatically exclude this one
-        $set 	= $this->SecureData($set, $datatypes);
-        $where 	= $this->SecureData($where,$wheretypes);
+        //$set 	= $this->SecureData($set, $datatypes);
+        //$where 	= $this->SecureData($where,$wheretypes);
         // SET
         $query = "UPDATE `{$table}` SET ";
         foreach($set as $key=>$value){
@@ -307,6 +310,7 @@ class MySQL {
             $query .= "`{$key}` = '{$value}' AND ";
         }
         $query = substr($query, 0, -5);
+
         return $this->executeSQL($query);
     }
     // 'Arrays' a single result

@@ -3,6 +3,7 @@ include_once "lib_mining/config.inc.php";
 
 $sensor_id = filter_input(INPUT_POST,"sensor_id",FILTER_VALIDATE_INT);
 $username = filter_input(INPUT_POST,"username",FILTER_DEFAULT); 
+//error_reporting(E_ALL);
 
    if ($_FILES["uploadedfile"]["error"] == UPLOAD_ERR_OK)       
    {      
@@ -30,6 +31,12 @@ $username = filter_input(INPUT_POST,"username",FILTER_DEFAULT);
         if ($sensor_id == GPS){
             include_once "lib_mining/gpsParser.php";
             $parser = new gpsParser($filename, $username);
+            $parser->parse();
+        }
+        if ($sensor_id == STAY_POINTS){
+            echo "Cloud Server: backup stay points";
+            include_once "lib_mining/stayPointParser.php";
+            $parser = new stayPointParser($filename, $username);
             $parser->parse();
         }
      }else{echo "Error moving file ".UPLOAD_DIR."/$filename";}

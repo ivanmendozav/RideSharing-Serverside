@@ -19,5 +19,5 @@ class ModelParameters {
     public static $csv_altitude_column = 2;
     public static $csv_timestamp_column = 3;
     
-    public static $debug_mode = false;
+    public static $debug_mode = true;
 }

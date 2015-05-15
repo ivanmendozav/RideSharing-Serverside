@@ -45,7 +45,8 @@ class GpsLog {
      * And also that time(po)- time(pm) >= epsilon 
      */
     public function GetStayPoints($k = 0, $n = null, $debug = null){
-        if(!$debug) {$debug = ModelParameters::$debug_mode;}
+        if(!$debug) {$debug = ModelParameters::$debug_mode; }
+        $start = microtime(true);
         $stay_points = null; //New set of stay points
         $delta = ModelParameters::$distance_threshold;
         $epsilon = ModelParameters::$time_threshold;
@@ -60,7 +61,7 @@ class GpsLog {
             $pi = $this->getPoint($i);
             //count next points within a distance lower than delta            
             while(ModelFormulas::GCDistance($pm, $pi) <= $delta && $i<$n){
-                if($debug){echo $m."->".$i."<br>";}
+                //if($debug){echo $m."->".$i."<br>";}
                 $o = $i; $po = $this->getPoint($o); //last point po under requirements
                 $subset_log[] = $pi;
                 $i++; if($i<$n) {$pi = $this->getPoint($i);}
@@ -69,7 +70,7 @@ class GpsLog {
                 $subset_log[] = $pm;
                 //check whether dwelling time is greater than epsilon    
                 $stay_time = abs($po->getTimestamp() - $pm->getTimestamp());
-                if($debug){echo $m."->".$o." : ".$stay_time."ms<br>";}
+                //if($debug){echo $m."->".$o." : ".$stay_time."ms<br>";}
                 if($stay_time >= $epsilon){
                     //create stay point from subset
                     $avg_latitude = $this->averageLatitudes($subset_log);
@@ -85,7 +86,7 @@ class GpsLog {
             $m = $i; // proceed searching from last visited point
             $subset_log = null;
         }
-        echo count($stay_points)." stay points were identified.";
+        if($debug) {echo count($stay_points)." stay point(s) were identified.<br>"; echo "Finished in ". (microtime(true)-$start)/1000 . "ms";}
         return $stay_points;
     }
 

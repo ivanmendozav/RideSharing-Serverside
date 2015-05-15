@@ -52,13 +52,13 @@ class DataMapper {
      * @return int
      */
     public static function checkUser($username){
-        $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
-        $user = $db->select("users", array("username" => "$username"));
+        $db = new DbAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $user = $db->Get("users", array("username" => "$username"));
         //print_r($user);
-        $db->closeConnection();
-        if($user["id"]){
+        $db->Close();
+        if($user[0]["id"]){
             echo $username." connected.";
-            return $user["id"];        
+            return $user[0]["id"];        
         }
         else{
             echo "user ".$username." not found. changed to Anonymous"; 

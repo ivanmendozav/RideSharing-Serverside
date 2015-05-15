@@ -33,11 +33,12 @@ abstract class sensorParser{
     * @throws Exception
     */
     public function parse($eraseFiles = true){
-        $user_id;
+        $user_id = "1";
         if($this->filename){        
             try{
                 $user_id = DataMapper::checkUser($this->username);
                 $db = new MySQL(DB_NAME, DB_USER, DB_PASSWORD);
+                echo DB_NAME. DB_USER. DB_PASSWORD;
                 if($db->lastError){
                 throw new Exception ("Couldn't connect to ".DB_NAME.",".DB_USER.",".DB_PASSWORD);}
                     
