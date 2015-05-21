@@ -3,7 +3,7 @@ include_once "lib_mining/config.inc.php";
 
 $sensor_id = filter_input(INPUT_POST,"sensor_id",FILTER_VALIDATE_INT);
 $username = filter_input(INPUT_POST,"username",FILTER_DEFAULT); 
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
    if ($_FILES["uploadedfile"]["error"] == UPLOAD_ERR_OK)       
    {      
@@ -29,6 +29,7 @@ $username = filter_input(INPUT_POST,"username",FILTER_DEFAULT);
             $parser->parse();
         }
         if ($sensor_id == GPS){
+            echo "Cloud Server: backup GPS points";
             include_once "lib_mining/gpsParser.php";
             $parser = new gpsParser($filename, $username);
             $parser->parse();
