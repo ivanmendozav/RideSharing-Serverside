@@ -44,12 +44,12 @@ class stayPointParser extends sensorParser{
 
         $db = new DbAdapter(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if(!$this->checkPoint(null, $user_id, $client_id)){
-   //   echo "Cloud Server: stay added.\n";
+      echo "Cloud Server: stay added.\n";
            $db->Insert(TABLE_NAME, array("avg_latitude" => $_avg_latitude, "avg_longitude" => $_avg_longitude, 
                "arrival" => $_arrival, "departure" => $_departure, "cardinality" => $_cardinality, "label" => $_label,
                "start_longitude" => $_start_longitude,"start_latitude" => $_start_latitude, "user_id" => $user_id, "client_id" => $client_id));
         }else{
-   //         echo "Cloud Server: stay updated.\n";
+            echo "Cloud Server: stay updated.\n";
             $db->Update(TABLE_NAME, array("departure" => $_departure, "cardinality" => $_cardinality, "avg_longitude" => $_avg_longitude, "avg_latitude" => $_avg_latitude), array("client_id" => $client_id, "user_id" => $user_id));
         }
         $db->Close();
