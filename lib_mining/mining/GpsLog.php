@@ -1,9 +1,10 @@
 <?php
 
-include "ModelParameters.php";
-include "ModelFormulas.php";
-include "GpsPoint.php";
-include "StayPoint.php";
+include_once "ModelParameters.php";
+include_once "ModelFormulas.php";
+include_once "GpsPoint.php";
+include_once "StayPoint.php";
+include_once "StaysLog.php";
 /**
  * Set of n Gps points<lon,lat,timestamp> = {p1,p2,..,pn-1,pn} measured within a time interval
  * Timestamp interval between points can be fixed or dynamic (depending on signal strength)
@@ -55,6 +56,7 @@ class GpsLog {
         if(!$n) {$n = count($this->gps_points);}
         
         while($m < $n-1){
+            $found = false;
             //for two succesive points            
             $pm = $this->getPoint($m);            
             $i = $m+1;
@@ -72,6 +74,7 @@ class GpsLog {
                 $stay_time = abs($po->getTimestamp() - $pm->getTimestamp());
                 //if($debug){echo $m."->".$o." : ".$stay_time."ms<br>";}
                 if($stay_time >= $epsilon){
+                    $found = true;
                     //create stay point from subset
                     $avg_latitude = $this->averageLatitudes($subset_log);
                     $avg_longitude = $this->averageLongitudes($subset_log);
@@ -80,13 +83,16 @@ class GpsLog {
                     $cardinality = count($subset_log);
                     $stay = new StayPoint($avg_latitude,$avg_longitude,$arrival,$departure,$cardinality, null);
                     $stay_points[] = $stay;
-                    if($debug){print_r($stay);echo "<br>";}
+                   // if($debug){print_r($stay);echo "<br>";}
+                    $m = $i; // proceed searching from last stay point
                 }
             }
-            $m = $i; // proceed searching from last visited point
+           //  $m = $i;
+            if(!$found)
+                $m++; // proceed searching from next point
             $subset_log = null;
         }
-        if($debug) {echo count($stay_points)." stay point(s) were identified.<br>"; echo "Finished in ". (microtime(true)-$start)/1000 . "ms";}
+        //if($debug) {echo count($stay_points)." stay point(s) were identified.<br>"; echo "Finished in ". (microtime(true)-$start)/1000 . "ms";}
         return $stay_points;
     }
 
@@ -129,6 +135,10 @@ class GpsLog {
         return ($length > 0 ? $sum/$length : 0);
     }
     
+    public static function size(){
+        return count($this->GetPoints());
+    }
+    
     /**
      * Instantiates a GPS log object from a CSV file (longitude, latitude, timestamp).
      * Fields must conform ModelParameters static attributes
@@ -143,10 +153,11 @@ class GpsLog {
         $timestamp_index = ModelParameters::$csv_timestamp_column;
         
         if (($handle = fopen($filename_path, "r")) !== FALSE) {
+            $this->gps_points = null;
             while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {                  
                 $longitude = $row[$longitude_index];
                 $latitude = $row[$latitude_index];
-                $altitude = $row[$altitude_index];
+                $altitude = 0;//$row[$altitude_index];
                 $timestamp = $row[$timestamp_index];    
                 $this->AddPoint(new GpsPoint($longitude, $latitude, $altitude, $timestamp));
             }                    

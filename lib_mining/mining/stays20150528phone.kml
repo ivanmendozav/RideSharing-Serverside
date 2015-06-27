@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+<Placemark>
+<Point><coordinates> 4.681182203719,50.861163378099,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.6821299657895,50.860939736842,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.6889534412162,50.878533591892,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.688829028125,50.8784718875,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.6889103451128,50.878475584211,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7006593287197,50.8792706,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7010760420382,50.879164828025,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.6888242525926,50.878515488889,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7058624860759,50.880436025316,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7006457724445,50.879272813778,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7009684866071,50.879243600595,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7045590104762,50.879709345714,0</coordinates></Point>
+</Placemark>
+<Placemark>
+<Point><coordinates> 4.7045601052063,50.879778577112,0</coordinates></Point>
+</Placemark>
+</Document>
+</kml>

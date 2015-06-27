@@ -6,11 +6,11 @@
 
 /*Sensors****************************/
 //(also defined on client side)
-define(ACCELEROMETER,1);
-define(BATTERY,90);
-define(WIFI,91);
-define(GPS,92);
-define(STAY_POINTS, 100);
+define("ACCELEROMETER",1);
+define("BATTERY",90);
+define("WIFI",91);
+define("GPS",92);
+define("STAY_POINTS", 100);
 
 //$_MAGNETIC_FIELD =2;
 //$_GYROSCOPE =4;

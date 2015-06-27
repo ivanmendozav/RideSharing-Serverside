@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+                <kml xmlns="http://earth.google.com/kml/2.0">
+                <Document><Placemark>
+                        <Point><coordinates>  3.3878433787879,51.069684689394,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3152207091503,51.203186411765,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3880144761905,51.069665801587,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2764435259259,51.057170918518,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.38800625,51.069659181548,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3326779583333,50.319788211538,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3269643333333,51.000873486111,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3880383103448,51.069631241379,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3392634045139,51.245636524306,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2866345666667,51.273784007407,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3261697592593,51.123098481482,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3880073084291,51.069618737548,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2858563849558,51.274424809734,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2241693055555,51.205382194444,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2586833229167,51.160666,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.2603235886525,51.159658609929,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3879555402299,51.069604988506,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.3880240023981,51.069658131894,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.39218025,51.072696833333,0</coordinates></Point>
+                        </Placemark><Placemark>
+                        <Point><coordinates>  3.6755317444444,51.072352448148,0</coordinates></Point>
+                        </Placemark></Document></kml>

@@ -23,6 +23,10 @@ Class StayPoint{
     protected $cardinality; // |S|
     protected $label; //optional description (if filled in by the user)
     protected $stay_time;
+    public $id;
+    public $clusterId;
+    public $visited;
+    public $noise;
     
     /**
      * Stay point constructor
@@ -39,6 +43,14 @@ Class StayPoint{
         $this->cardinality = $cardinality;
         $this->label = $label;
         $this->stay_time = $this->departure - $this->arrival;
+        $this->visited = false;
+        $this->noise = false;
+        $this->clusterId = 0;
+    }
+
+    public function hasCluster(){
+        if($this->clusterId == 0) return false;
+        return true;
     }
     
     /**
@@ -73,5 +85,13 @@ Class StayPoint{
         return $this->stay_time;
     }
 
+    public function IsMergeable(StayPoint $s){
+        $p1 = new GpsPoint($this->getAvg_longitude(), $this->getAvg_latitude(), 0, 0);
+        $p2 = new GpsPoint($s->getAvg_longitude(), $s->getAvg_latitude(), 0, 0);
+        if(ModelFormulas::GCDistance($p1, $p2)< ModelParameters::$search_radius){
+            return true;
+        }
+        return false;
+    } 
 
 }
